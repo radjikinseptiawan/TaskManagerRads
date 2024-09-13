@@ -1,8 +1,9 @@
+
 /* eslint-disable react/prop-types */
-export default function TaskChild({key,val,onClickCompleted,onClickDeleted,onClickEdited}) {
+export default function TaskChild({thisKey,val,onClickCompleted,onClickDeleted,onClickEdited,el,id}) {
   return (
     <>
-                <li key={key} 
+                <li key={thisKey} 
             className="
             list-none 
             m-2
@@ -19,6 +20,8 @@ export default function TaskChild({key,val,onClickCompleted,onClickDeleted,onCli
             text-sm
             bg-yellow-700
             "
+            id={id} 
+            ref={el}
             />
             <button className="
             m-2
