@@ -38,13 +38,7 @@ export default function  TaskField() {
        </TaskBox>
        { editMode ? (
         <>
-        <div className="
-        w-96
-        bg-amber-900
-        p-2
-        my-2
-        mx-auto
-"> 
+        <div className="w-96 bg-amber-900 p-2 my-2 mx-auto"> 
 <EditingMode 
           value={string} 
           setStrings={e => setString(e.target.value)} 
