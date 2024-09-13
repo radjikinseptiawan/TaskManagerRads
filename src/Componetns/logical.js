@@ -5,7 +5,10 @@ export const inputButtonLogic = (addState,id,string,stringState,array,idState)=>
 }
 
 
-export const deletedClick =  (checkTask,task,item) => {checkTask(task.filter((items)=> items.idNo !== item.idNo))}
+export const deletedClick =  (checkTask,task,item,EditMode) => {
+    checkTask(task.filter((items)=> items.idNo !== item.idNo))
+    EditMode(false)
+}
             
 export const EditTaskSelect = (editId,stateTask,stateSelectEdit,stateString,item,value)=>{
     const updatedTasks =item.map((item)=>item.idNo === editId ? {...item,name:value} : item)

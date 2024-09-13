@@ -26,7 +26,7 @@ export default function  TaskField() {
             return <TaskChild 
              thisKey={item.idNo} 
              val={item.name}
-             onClickDeleted={()=>deletedClick(setTask,task,item)}
+             onClickDeleted={()=>deletedClick(setTask,task,item,setEditMode)}
              onClickEdited={()=>{
               setSelectEdit(item.idNo)
               setString(item.name)
