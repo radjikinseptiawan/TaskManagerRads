@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import InpuElement from "../Input"
 import TaskBox from "../TaskBox"
 import { deletedClick, inputButtonLogic,EditTaskSelect } from "../logical"
@@ -12,29 +12,48 @@ export default function  TaskField() {
   const [id,setId] = useState(0)  
   const [selectEdit, setSelectEdit] = useState([])
   const [editMode, setEditMode] = useState(false)
+  // const [status,setStatus] = useState([])
 
+  const inputButtonLogical = useCallback(()=>{
+    inputButtonLogic(setTask,id,string,setString,task,setId)
+  },[setTask,id,string,setString,task,setId])
 
+  const editClickLogic = useCallback(()=>{
+    setEditMode(false)
+    EditTaskSelect(selectEdit,setTask,setSelectEdit,setString,task,string)
+  },[selectEdit,setTask,setSelectEdit,setString,task,string])
+
+  const completedStatus = (completeds)=>{
+    const completedTask = task.map(item => item.idNo === completeds ? {...item,completed:true, unCompleted : false} : item)
+    setTask(completedTask)
+  }
     return (
     <>
         <InpuElement 
         onChange={e => setString(e.target.value)} 
         value={string}
-        onClick={()=>inputButtonLogic(setTask,id,string,setString,task,setId)}
+        onClick={inputButtonLogical}
         />
         <TaskBox>
         {task.map((item)=>{
-            return <TaskChild 
+            return (<TaskChild 
              thisKey={item.idNo} 
              val={item.name}
              onClickDeleted={()=>deletedClick(setTask,task,item,setEditMode)}
              onClickEdited={()=>{
               setSelectEdit(item.idNo)
               setString(item.name)
-              setEditMode(true)
+              if(!item.completed){
+              setEditMode(true)}
              }}
+             onClickCompleted={()=>completedStatus(item.idNo)}
+             childrenCompleteButton={item.completed ? "UnCompleted" : "Completed"}
+             textColor={item.completed ? "text-slate-600" : "text-lime-600"}
+             bgColor={item.completed ? "bg-slate-500" : "bg-lime-500"}
              >
-             </TaskChild>
-        })}
+             </TaskChild> 
+            )
+       })}
        </TaskBox>
        { editMode ? (
         <>
@@ -42,10 +61,9 @@ export default function  TaskField() {
 <EditingMode 
           value={string} 
           setStrings={e => setString(e.target.value)} 
-          clicked={()=>{
-            setEditMode(false)
-            EditTaskSelect(selectEdit,setTask,setSelectEdit,setString,task,string)
-          }}/>
+          clicked={editClickLogic}
+          cancel={()=>setEditMode(false)}
+          />
         </div>
      </>
       ) : null}

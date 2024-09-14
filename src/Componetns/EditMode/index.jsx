@@ -1,6 +1,6 @@
 
 // eslint-disable-next-line react/prop-types
-export default function EditingMode({value,setStrings,clicked}) {
+export default function EditingMode({value,setStrings,cancel,clicked}) {
   return (
     <>
                 
@@ -21,6 +21,19 @@ export default function EditingMode({value,setStrings,clicked}) {
           "
  >
           Save Edit
+        </button>
+        <button onClick={cancel}
+        className="
+           mx-2
+          bg-red-600
+          p-2
+          text-red-800
+          rounded
+          hover:text-white
+        
+        "
+        >
+            Cancel
         </button>
         </>
   )

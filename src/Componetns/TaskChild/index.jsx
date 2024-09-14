@@ -1,6 +1,6 @@
 
 /* eslint-disable react/prop-types */
-export default function TaskChild({thisKey,val,onClickCompleted,onClickDeleted,onClickEdited,el,id}) {
+export default function TaskChild({thisKey,val,onClickCompleted,onClickDeleted,onClickEdited,el,id,childrenCompleteButton,textColor,bgColor}) {
   return (
     <>
                 <li key={thisKey} 
@@ -10,10 +10,10 @@ export default function TaskChild({thisKey,val,onClickCompleted,onClickDeleted,o
             id={id} 
             ref={el}
             />
-            <button className=" m-2 bg-lime-500  p-1 text-lime-600 hover:text-white  rounded "
+            <button className={` m-2 ${bgColor}  p-1 ${textColor} hover:text-white  rounded `}
             onClick={onClickCompleted}
             >
-                Completed
+                {childrenCompleteButton}
             </button>
             <button className="m-2 bg-blue-500  p-1 text-blue-600 hover:text-white  rounded "
             onClick={onClickEdited}>edit</button>
