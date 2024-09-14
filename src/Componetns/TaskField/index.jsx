@@ -2,7 +2,7 @@
 import { useCallback, useState } from "react"
 import InpuElement from "../Input"
 import TaskBox from "../TaskBox"
-import { deletedClick, inputButtonLogic,EditTaskSelect } from "../logical"
+import { deletedClick, inputButtonLogic,EditTaskSelect,completedStatus } from "../logical"
 import TaskChild from "../TaskChild"
 import EditingMode from "../EditMode"
 
@@ -23,10 +23,6 @@ export default function  TaskField() {
     EditTaskSelect(selectEdit,setTask,setSelectEdit,setString,task,string)
   },[selectEdit,setTask,setSelectEdit,setString,task,string])
 
-  const completedStatus = (completeds)=>{
-    const completedTask = task.map(item => item.idNo === completeds ? {...item,completed:true, unCompleted : false} : item)
-    setTask(completedTask)
-  }
     return (
     <>
         <InpuElement 
@@ -46,8 +42,8 @@ export default function  TaskField() {
               if(!item.completed){
               setEditMode(true)}
              }}
-             onClickCompleted={()=>completedStatus(item.idNo)}
-             childrenCompleteButton={item.completed ? "UnCompleted" : "Completed"}
+             onClickCompleted={()=>completedStatus(item.idNo,setTask,task)}
+             childrenCompleteButton={item.completed ? "Uncompleted" : "Completed"}
              textColor={item.completed ? "text-slate-600" : "text-lime-600"}
              bgColor={item.completed ? "bg-slate-500" : "bg-lime-500"}
              >

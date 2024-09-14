@@ -16,3 +16,10 @@ export const EditTaskSelect = (editId,stateTask,stateSelectEdit,stateString,item
     stateString('')
     stateSelectEdit(null)
     }
+
+
+    
+export const completedStatus = (completeds,stateTask,tasked)=>{
+    const completedTask = tasked.map(item => item.idNo === completeds ? {...item,completed:true, unCompleted : false} : item)
+    stateTask(completedTask)
+  }
